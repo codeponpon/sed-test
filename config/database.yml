@@ -1,0 +1,20 @@
+development:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: sedigital_development
+  pool:     5
+  username: pond
+  password: asdqwe123
+
+test:
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: sedigital_test
+  pool:     5
+  username: pond
+  password: asdqwe123
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>

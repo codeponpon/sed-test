@@ -1,0 +1,1 @@
+Doorkeeper::OAuth::TokenResponse.send(:prepend, CustomTokenResponse)

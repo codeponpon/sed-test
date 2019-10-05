@@ -1,0 +1,10 @@
+production:
+  adapter: redis
+  url: <%= ENV["REDIS_URL"] %>
+  channel_prefix: mazda_rama7_production
+
+development:
+  adapter: async
+
+test:
+  adapter: async
