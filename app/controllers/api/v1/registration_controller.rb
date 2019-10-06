@@ -1,11 +1,62 @@
 class Api::V1::RegistrationController < ApiGuardian::RegistrationController
+
+  api :POST, '/register', 'Sign up'
+  error :code => 400, :desc => 'Bad Request'
+  description "method description"
+  formats ['json']
+  param :email, String, required: true
+  param :phone_number, String, required: true
+  param :name, String, required: true
+  example '
+  {
+    "data": {
+        "id": "ac54aefa-fac6-4680-b42c-8742254c480e",
+        "type": "users",
+        "attributes": {
+            "code": "C20191065918",
+            "name": "Pond",
+            "email": "user@example.com",
+            "email-confirmed-at": "2019-10-06T19:59:16.310+07:00",
+            "phone-number": "0623939898",
+            "phone-number-confirmed-at": null,
+            "address": null,
+            "line-id": null,
+            "document-address": null,
+            "created-at": "2019-10-06T19:59:17.689+07:00",
+            "updated-at": "2019-10-06T19:59:18.210+07:00",
+            "is-guest": false
+        },
+        "relationships": {
+            "role": {
+                "data": {
+                    "id": "4eecd34d-d6ea-4495-8839-f892bd1ede2d",
+                    "name": "customer",
+                    "default": true,
+                    "created_at": "2019-10-05T15:30:51.545+07:00",
+                    "updated_at": "2019-10-05T15:30:51.545+07:00"
+                }
+            },
+            "setting": {
+                "data": {
+                    "id": "f99dc485-8c73-4b78-999b-498a848ed0db",
+                    "user_id": "ac54aefa-fac6-4680-b42c-8742254c480e",
+                    "notification": true,
+                    "language": "th",
+                    "created_at": "2019-10-06T19:59:17.782+07:00",
+                    "updated_at": "2019-10-06T19:59:17.782+07:00",
+                    "mid": null
+                }
+            }
+        }
+    }
+}'
   def create
     user = UserStore.register(register_params)
     UserStore.new(nil).add_phone(user, add_phone_params)
     render json: user, adapter: :json_api, status: :created, include: ['role']
   end
 
-  api :POST, '/auth/set-password', 'Set new password'
+  api :POST, '/set-password', 'Set new password'
   error :code => 400, :desc => 'Bad Request'
   description "method description"
   formats ['json']

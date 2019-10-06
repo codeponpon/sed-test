@@ -89,3 +89,5 @@ pickle-email-*.html
 erd.pdf
 public/uploads
 .scannerwork/
+
+se-frontend/node_modules/
