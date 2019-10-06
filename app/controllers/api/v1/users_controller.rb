@@ -80,6 +80,16 @@ class Api::V1::UsersController < Api::V1::ApiController
   api :POST, '/users/:id/verify_phone', 'Verify phone number'
   description "method description"
   formats ['json']
+  param :data, Hash, required: true do
+    param :attributes, Hash, required: true do
+      param :email, String, required: true
+      param :otp, String, reuiqred: true
+    end
+  end
+  example '
+  {
+    "token": "6d4452f30182351af87b1ed3ce8a70b7f64b20737d8aa13be89e84896e681d3974dbecc943db2c1a1a4cba08d62a1a37aea748b891e443784c032e062ecf49fe"
+  }'
   def verify_phone
     user = resource
     user.otp_enabled = false if user.otp_enabled

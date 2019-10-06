@@ -70,8 +70,47 @@ class Api::V1::RegistrationController < ApiGuardian::RegistrationController
   end
   example '
   {
-      "status": "OK"
-  }'
+    "data": {
+        "id": "ac54aefa-fac6-4680-b42c-8742254c480e",
+        "type": "users",
+        "attributes": {
+            "code": "C20191063545",
+            "name": "Pond",
+            "email": "freelancer558@gmail.com",
+            "email-confirmed-at": "2019-10-06T19:59:16.310+07:00",
+            "phone-number": "0623939898",
+            "phone-number-confirmed-at": "2019-10-06T20:34:28.872+07:00",
+            "address": null,
+            "line-id": null,
+            "document-address": null,
+            "created-at": "2019-10-06T19:59:17.689+07:00",
+            "updated-at": "2019-10-06T20:35:45.767+07:00",
+            "is-guest": false
+        },
+        "relationships": {
+            "role": {
+                "data": {
+                    "id": "4eecd34d-d6ea-4495-8839-f892bd1ede2d",
+                    "name": "customer",
+                    "default": true,
+                    "created_at": "2019-10-05T15:30:51.545+07:00",
+                    "updated_at": "2019-10-05T15:30:51.545+07:00"
+                }
+            },
+            "setting": {
+                "data": {
+                    "id": "f99dc485-8c73-4b78-999b-498a848ed0db",
+                    "user_id": "ac54aefa-fac6-4680-b42c-8742254c480e",
+                    "notification": true,
+                    "language": "th",
+                    "created_at": "2019-10-06T19:59:17.782+07:00",
+                    "updated_at": "2019-10-06T19:59:17.782+07:00",
+                    "mid": null
+                }
+            }
+        }
+    }
+}'
   def set_password
     user = User.find_by_email(params[:data][:user][:email])
     if user.nil? || (user && user.phone_number_confirmed_at.nil?)
